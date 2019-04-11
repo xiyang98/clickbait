@@ -1,6 +1,7 @@
 # YouTube Clickbait Project
 CS121 Spring 2019
 
+
 ### Python script
 
 The clickbait_test_real.py script shows an exmaple of how the clickbait detection is done:
@@ -26,3 +27,5 @@ credential_sample.json: This file allows the script to work without retrieving t
 client_secret_3.json: The client_secrets.json file format is a JSON formatted file containing the client ID, client secret, and other OAuth 2.0 parameters. Here is an example client_secrets.json file for a web application:
 
 ### Models
+
+navigate to the clickbait repository and run `unzip models.zip` to get the model folder
