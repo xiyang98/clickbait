@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+flask = "*"
+oauth2client = "*"
+google-api-python-client = "*"
+google-auth-oauthlib = "*"
+emoji = "*"
+numpy = "*"
+pandas = "*"
+pickle-mixin = "*"
+gensim = "*"
+torch = {file = "http://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-linux_x86_64.whl"}
+fastai = "*"
+scikit-learn = "*"
+tensorflow = "*"
+paramiko = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.7"

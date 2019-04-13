@@ -1,4 +1,3 @@
-
 import argparse
 import os
 import re
@@ -10,7 +9,10 @@ from gensim.parsing.preprocessing import *
 from fastai.vision import *
 import requests
 from io import BytesIO
+import tensorflow as tf
+import warnings
 
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 
 def tokenize(string):
@@ -155,19 +157,20 @@ def main():
     classes = ['clickbait','non_clickbait']
     path = os.getcwd()                
     data = ImageDataBunch.single_from_classes(path, classes, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
-    learn = cnn_learner(data, models.resnet50)
-    learn.load('clickbait-model')
+    learn = cnn_learner(data, models.resnet34)
+    learn.load('clickbait-model-2')
     img_data = BytesIO(requests.get(args.imageurl).content)
     im = open_image(img_data)
     # Print image prediction:
     img_pred = learn.predict(im)[2][0]
-
     # Print title prediction:
     title_pred = svm.predict_proba(sample)[0][1]
 
     # Print clickbait probability
+    tensor = (img_pred+title_pred)/2
+    tensor_list = list(str(tensor))
+    result = float(''.join(tensor_list[7:-1]))
+    return result
 
-    return (img_pred+title_pred)/2
-
-
-print(main())
+if __name__ == '__main__':
+    print(main())

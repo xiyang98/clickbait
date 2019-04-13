@@ -210,7 +210,7 @@ def playlist_items_list_by_playlist_id(client, **kwargs):
   length = len(response['items'])
   get_videos(response, length)
 
-if __name__ == '__main__':
+def main():
   # When running locally, disable OAuthlib's HTTPs verification. When
   # running in production *do not* leave this option enabled.
   # os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -243,4 +243,11 @@ if __name__ == '__main__':
       part='snippet,contentDetails,statistics',
       maxResults=1,
       id=vidId)
-  subprocess.call(['python', 'predict.py', '-t=' + myTitle, '-v=' + videoViews, '-l=' + videoLikes, '-d=' + videoDislikes, '-c=' + videoComments, '-i=' + myThumbnail])
+  result = subprocess.check_output(['python', 'predict.py', '-t=' + myTitle, '-v=' + videoViews, '-l=' + videoLikes, '-d=' + videoDislikes, '-c=' + videoComments, '-i=' + myThumbnail])
+  print(result.decode('ascii'))
+  return result
+
+
+
+if __name__ == '__main__':
+  main()
