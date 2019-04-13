@@ -1,6 +1,4 @@
 
 *.csv
-mean-log*
-min-max*
-
+.DS_Store
 __pycache__
