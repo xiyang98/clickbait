@@ -1,0 +1,6 @@
+
+*.csv
+mean-log*
+min-max*
+
+__pycache__
