@@ -7,19 +7,12 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-oauth2client = "*"
+fastai = "*"
 google-api-python-client = "*"
 google-auth-oauthlib = "*"
+oauth2client = "*"
 emoji = "*"
-numpy = "*"
-pandas = "*"
-pickle-mixin = "*"
+requests = "*"
 gensim = "*"
-fastai = "*"
-scikit-learn = "*"
 tensorflow = "*"
-paramiko = "*"
-gunicorn = "*"
-
-[requires]
-python_version = “3.6”
+sklearn = "*"

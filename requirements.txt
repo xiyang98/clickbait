@@ -31,7 +31,6 @@ google-auth==1.6.3
 grpcio==1.19.0
 gunicorn==19.9.0
 h5py==2.9.0
-http://download.pytorch.org/whl/cpu/torch-1.0.0-cp36-cp36m-linux_x86_64.whl#egg=torch
 httplib2==0.12.1
 idna==2.8
 itsdangerous==1.1.0

@@ -9,7 +9,6 @@ from gensim.parsing.preprocessing import *
 from fastai.vision import *
 import requests
 from io import BytesIO
-import tensorflow as tf
 import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
