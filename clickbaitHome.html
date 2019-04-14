@@ -54,12 +54,15 @@
          success: data => {
            console.log("Got the prediction result!");
            console.log(data);
-           $("#predictions").text(data.predictions);
+          //  $("#predictions").text(data.predictions);
+           prediction = data.predictions * 100;
+           $("#predictions").text("This video is " + prediction + "% likely to be clickbait");
          },
          error: data => {
            console.error("There was an error!");
            console.error(data);
            console.log(userUrl);
+           $("#predictions").text("There was an error! Please check the URL you inputted or try anotha one :~)");
          }
        })
       }
