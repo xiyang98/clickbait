@@ -4,3 +4,7 @@ a {
     size: "6";
     text-decoration: none;
 }
+
+body {
+    font-family: Arial;
+}
