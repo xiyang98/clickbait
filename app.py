@@ -8,7 +8,7 @@ app = flask.Flask(__name__)
 # home page for clickbait: have user input bar
 @app.route("/")
 def hello_route():
-    return flask.send_from_directory(".", "clickbaitHome.html")
+    return flask.send_from_directory("templates/", "clickbaitHome.html")
 
 
 @app.route("/api/v1/classify", methods=["POST"])

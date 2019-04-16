@@ -3,16 +3,21 @@
 
 <head>
 
-  <link rel="stylesheet" type="text/css" href="clickbaitHomeSyle.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='clickbaitHomeStyle.css') }}">
 
 </head>
 
 <body>
 
-<h1>
-  <!---<img src = "clickbait.jpg" alt = "Clickbait.com" width = "80" height = "50">--->
-  <font face="Impact" size = "6"> YouTube Clickbait Detector </font>
-</h1>
+<div class="header">
+  <h1>
+    <!---<img src = "clickbait.jpg" alt = "Clickbait.com" width = "80" height = "50">--->
+    <!-- <font face="Impact" size = "6"> YouTube Clickbait Detector </font> -->
+    <a href="/" title="Home">
+      YouTube Clickbait Detector
+    </a>
+  </h1>
+</div>
 
 
 <p> <font face="Arial"> This page allows you to determine whether a YouTube video is clickbait or not!
@@ -22,20 +27,15 @@
 <p style="color:gray">
   <textarea id="urlBox" style="width:60%;height:25px;background-color:#f2f2f2;color:#bbbbbb;
     border:none;padding:2%;font:18px/24px Arial;">
-    Insert Link Here</textarea>
+    https://www.youtube.com/watch?v=6AYv6rV3NXE</textarea>
     <button onclick="apiRequest()" style = "background-color:red; color:white; padding:5px; font-size:18px;
       padding:8px; border:none"> Analyze! </button>
 </p>
 
-<p id="predictions"> ? </p>
-
-<!-- <p id="demo"></p> -->
-
+<p id="predictions"> </p>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-      // makeRequest("/api/v1/greeting", { name: "Radon" })
-
       // pass user-inputted url as string as data and get prediction result
      function apiRequest() {
        console.log("Making request ...");
@@ -48,13 +48,11 @@
          // What is the data?
          contentType: "application/json",
          data: JSON.stringify(userUrl),
-        //  data: {myUrl: userUrl},
          // What do we do with the response?
          dataType: "json",
          success: data => {
            console.log("Got the prediction result!");
            console.log(data);
-          //  $("#predictions").text(data.predictions);
            prediction = data.predictions * 100;
            $("#predictions").text("This video is " + prediction + "% likely to be clickbait");
          },
