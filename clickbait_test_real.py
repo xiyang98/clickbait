@@ -70,10 +70,23 @@ def videos_list_by_id(client, **kwargs):
 def get_video_id(path):
   """
   Get video id from a youtube URL
-  For now, only of the form https://www.youtube.com/watch?v=VIDEOID
+  Handles URLs of the form https://www.youtube.com/watch?v=VIDEOID
+    and cuts off anything extra after VIDEOID .
+  Also handles URLs of the form https://youtu.be/VIDEOID produced
+    with YouTube's share option.
   """
-  idIndex = path.find('=') + 1
-  videoId = path[idIndex:]
+  videoId = ""
+  if path.find(".be") != -1:
+    idIndex = path.find('.be/') + 4
+    videoId = path[idIndex:]
+  else:
+    idIndex = path.find('=') + 1
+    startAtId = path[idIndex:]
+    if startAtId.find('&') != -1:
+      extraPartIndex = startAtId.find('&')
+      videoId = startAtId[0:extraPartIndex]
+    else:
+      videoId = startAtId
   return videoId
 
 def get_single_video(client, **kwargs):
