@@ -1,10 +1,40 @@
-a {
-    color: black;
-    font-family: Impact;
-    size: "6";
-    text-decoration: none;
+.analyzeButton {
+    background-color:red;
+    border: none;
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
+    padding: 2%;
 }
 
 body {
     font-family: Arial;
+}
+
+h1 {
+    text-align: center;
+}
+
+.homeTitle {
+    color: black;
+    font-family: Impact;
+    text-decoration: none;
+}
+
+.inputBox {
+    background-color: #f2f2f2;
+    border: none;
+    color:#bbbbbb;
+    float: left;
+    font:18px/24px Arial;
+    height: 25px;
+    margin-left: 150px;
+    padding: 2%;
+    width: 60%;
+}
+
+.intro {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
