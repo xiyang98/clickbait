@@ -34,6 +34,11 @@ API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
 
 def get_authenticated_service():
+  """
+    Method to establish a client to access the
+    YouTube Data API
+    Requires OAuth credentials to access the API
+  """
   credential_path = os.path.join('./', 'credential_sample.json')
   store = Storage(credential_path)
   credentials = store.get()
@@ -41,39 +46,25 @@ def get_authenticated_service():
     print("!")
     flow = client.flow_from_clientsecrets(CLIENT_SECRETS_FILE, SCOPES)
     credentials = tools.run_flow(flow, store)
-
-    # flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-    # credentials = flow.run_console()
   return build(API_SERVICE_NAME, API_VERSION, credentials=credentials)
 
-def print_response(response, length):
-  for i in range(length):
-    print("\n")
-    print(response['items'][i]['id'])
-    print(response['items'][i]['snippet']['title'])
-
 def downloader(image_url, name):
-    file_name = name
-    full_file_name = file_name + '.jpg'
-    urllib.request.urlretrieve(image_url,full_file_name)
-    return full_file_name
-
-def videos_list_by_id(client, **kwargs):
-  kwargs = remove_empty_kwargs(**kwargs)
-
-  response = client.videos().list(
-    **kwargs
-  ).execute()
-
-  return response
+  """
+    Downloads an image from image_url and names the 
+    image name.jpg
+  """
+  file_name = name
+  full_file_name = file_name + '.jpg'
+  urllib.request.urlretrieve(image_url,full_file_name)
+  return full_file_name
 
 def get_video_id(path):
   """
-  Get video id from a youtube URL
-  Handles URLs of the form https://www.youtube.com/watch?v=VIDEOID
-    and cuts off anything extra after VIDEOID .
-  Also handles URLs of the form https://youtu.be/VIDEOID produced
-    with YouTube's share option.
+    Get video id from a youtube URL
+    Handles URLs of the form https://www.youtube.com/watch?v=VIDEOID
+      and cuts off anything extra after VIDEOID .
+    Also handles URLs of the form https://youtu.be/VIDEOID produced
+      with YouTube's share option.
   """
   videoId = ""
   if path.find(".be") != -1:
@@ -91,7 +82,10 @@ def get_video_id(path):
 
 def get_single_video(client, **kwargs):
   """
-  Get video and channel data for a SINGLE video
+    Get video and channel data for a SINGLE video
+    video dislikes, likes, views, comment count, title, and thumbnail URL
+    from a video ID (as well as info from the video's channel as detailed in 
+    get_channel_data())
   """
   kwargs = remove_empty_kwargs(**kwargs)
 
@@ -125,12 +119,13 @@ def get_single_video(client, **kwargs):
   else:
     # status = response['items'][0]['status']['privacyStatus']
     print("This video is a ", response['items'][0]['snippet']['title'])
+  
 def get_videos(response, length):
   """
-  Get video dislikes, likes, views, comment count, title, and thumbnail URL
-  from a video ID (as well as info from the video's channel as detailed in 
-  get_channel_data())
-  Also adds rows to clickbaits.csv to store the data gathered
+    Get video dislikes, likes, views, comment count, title, and thumbnail URL
+    from a video ID (as well as info from the video's channel as detailed in 
+    get_channel_data())
+    Also adds rows to clickbaits.csv to store the data gathered
   """
   csvfile = open("clickbaits.csv", "a")
   for i in range(length):
@@ -147,8 +142,6 @@ def get_videos(response, length):
 
       myTitle = video['items'][0]['snippet']['title']
       myThumbnail = video['items'][0]['snippet']['thumbnails']['default']['url']
-      # if myTitle.find('/') == -1:
-      #   downloader(myThumbnails, myTitle[0:10])
 
       videoDislikes = video['items'][0]['statistics']['dislikeCount']
       videoLikes = video['items'][0]['statistics']['likeCount']
@@ -165,8 +158,8 @@ def get_videos(response, length):
 
 def get_channel_data(client, **kwargs):
   """
-  Get channel name, # of subscribers, video count, 
-  and view count from a channel ID
+    Get channel name, # of subscribers, video count, 
+    and view count from a channel ID
   """
   kwargs = remove_empty_kwargs(**kwargs)
 
@@ -183,8 +176,11 @@ def get_channel_data(client, **kwargs):
   channelData = [myChannelId, myChannelName, myChannelSubs, myChannelVidCount, myChannelViews]
   return channelData
 
-# Remove keyword arguments that are not set
 def remove_empty_kwargs(**kwargs):
+  """
+    Remove keyword arguments for an API call
+    that are not set
+  """
   good_kwargs = {}
   if kwargs is not None:
     for key, value in kwargs.items():
@@ -194,8 +190,8 @@ def remove_empty_kwargs(**kwargs):
 
 def playlists_list_by_channel_id(client, **kwargs):
   """
-  get playlist IDs from a channel by inputting a
-  channel ID
+    get playlist IDs from a channel by inputting a
+    channel ID
   """
   kwargs = remove_empty_kwargs(**kwargs)
 
@@ -217,9 +213,8 @@ def playlists_list_by_channel_id(client, **kwargs):
 
 def playlist_items_list_by_playlist_id(client, **kwargs):
   """
-  Get videos in a playlist by inputting playlist id
+    Get videos in a playlist via playlist id
   """
-  # See full sample for function
   kwargs = remove_empty_kwargs(**kwargs)
 
   response = client.playlistItems().list(
@@ -230,30 +225,26 @@ def playlist_items_list_by_playlist_id(client, **kwargs):
   get_videos(response, length)
 
 def main():
-  # When running locally, disable OAuthlib's HTTPs verification. When
-  # running in production *do not* leave this option enabled.
-  # os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
   client = get_authenticated_service()
 
+  # UNCOMMENT TO DOWNLOAD MULTIPLE VIDEOS FOR TRAINING DATA
   # clickbaitChannels = []
-  # count = 1
   # with open(CLICKBAIT_CHANNELS_FILE) as f:
-  #     for line in f:
-  #         if count > 10:
-  #           clickbaitChannels.append(json.loads(line))
-  #         count += 1
-
+  #   for line in f:
+  #     clickbaitChannels.append(json.loads(line))
   # for myChannelId in clickbaitChannels:
   #   playlists_list_by_channel_id(client,
   #     part='id,snippet,contentDetails',
   #     channelId=myChannelId,
   #     maxResults=10)
+
   results = get_single_video(client,
     part="snippet,contentDetails,statistics",
     maxResults=1,
     id="4_hHKlEZ9Go")
   print(results)
 
+  # CODE TO RUN CLASSIFICATION MODELS ON A VIDEO
   # parser = argparse.ArgumentParser(description="Predict if a Youtube video is clickbait or not.")
   # parser.add_argument(
   #     "--url", "-u",
@@ -270,8 +261,6 @@ def main():
   # result = subprocess.check_output(['python', 'predict.py', '-t=' + myTitle, '-v=' + videoViews, '-l=' + videoLikes, '-d=' + videoDislikes, '-c=' + videoComments, '-i=' + myThumbnail])
   # print(result.decode('ascii'))
   # return result
-
-
 
 if __name__ == '__main__':
   main()
