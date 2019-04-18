@@ -114,10 +114,17 @@ def get_single_video(client, **kwargs):
     videoDislikes = response['items'][0]['statistics']['dislikeCount']
     videoLikes = response['items'][0]['statistics']['likeCount']
     videoViews = response['items'][0]['statistics']['viewCount']
-    videoComments = response['items'][0]['statistics']['commentCount']
+    videoComments = 0
+    try:
+      videoComments = response['items'][0]['statistics']['commentCount']
+    except KeyError:
+      print("this video has no comments")
+      return videoId, channelId, channelData, myTitle, myThumbnail, videoComments, videoDislikes, videoLikes, videoViews
 
-    # print(videoId, channelId, channelData, myTitle, myThumbnail, videoComments, videoDislikes, videoLikes, videoViews)
     return videoId, channelId, channelData, myTitle, myThumbnail, videoComments, videoDislikes, videoLikes, videoViews
+  else:
+    # status = response['items'][0]['status']['privacyStatus']
+    print("This video is a ", response['items'][0]['snippet']['title'])
 def get_videos(response, length):
   """
   Get video dislikes, likes, views, comment count, title, and thumbnail URL
@@ -133,7 +140,6 @@ def get_videos(response, length):
         part='snippet,contentDetails,statistics',
         id=videoId)
 
-      # myID = response['items'][i]['id']
       channelId = response['items'][i]['snippet']['channelId']
       channelData = get_channel_data(client,
         part='snippet,contentDetails,statistics',
@@ -242,23 +248,28 @@ def main():
   #     part='id,snippet,contentDetails',
   #     channelId=myChannelId,
   #     maxResults=10)
+  results = get_single_video(client,
+    part="snippet,contentDetails,statistics",
+    maxResults=1,
+    id="4_hHKlEZ9Go")
+  print(results)
 
-  parser = argparse.ArgumentParser(description="Predict if a Youtube video is clickbait or not.")
-  parser.add_argument(
-      "--url", "-u",
-      type=str, help="youtube url.", required=True)
-  args = parser.parse_args()
+  # parser = argparse.ArgumentParser(description="Predict if a Youtube video is clickbait or not.")
+  # parser.add_argument(
+  #     "--url", "-u",
+  #     type=str, help="youtube url.", required=True)
+  # args = parser.parse_args()
 
-  vidId = get_video_id(args.url)
+  # vidId = get_video_id(args.url)
 
-  videoId, channelId, channelData, myTitle, myThumbnail, videoComments, videoDislikes, videoLikes, videoViews \
-    = get_single_video(client,
-      part='snippet,contentDetails,statistics',
-      maxResults=1,
-      id=vidId)
-  result = subprocess.check_output(['python', 'predict.py', '-t=' + myTitle, '-v=' + videoViews, '-l=' + videoLikes, '-d=' + videoDislikes, '-c=' + videoComments, '-i=' + myThumbnail])
-  print(result.decode('ascii'))
-  return result
+  # videoId, channelId, channelData, myTitle, myThumbnail, videoComments, videoDislikes, videoLikes, videoViews \
+  #   = get_single_video(client,
+  #     part='snippet,contentDetails,statistics',
+  #     maxResults=1,
+  #     id=vidId)
+  # result = subprocess.check_output(['python', 'predict.py', '-t=' + myTitle, '-v=' + videoViews, '-l=' + videoLikes, '-d=' + videoDislikes, '-c=' + videoComments, '-i=' + myThumbnail])
+  # print(result.decode('ascii'))
+  # return result
 
 
 
