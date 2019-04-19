@@ -1,0 +1,13 @@
+body {
+    font-family: Arial;
+}
+
+h1 {
+    text-align: center;
+}
+
+.aboutTitle {
+    color: black;
+    font-family: Impact;
+    text-decoration: none;
+}

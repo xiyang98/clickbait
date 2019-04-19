@@ -6,9 +6,12 @@ import subprocess
 app = flask.Flask(__name__)
 
 @app.route("/")
-def hello_route():
+def home_route():
     return flask.send_from_directory("templates/", "clickbaitHome.html")
 
+@app.route("/about")
+def about_route():
+    return flask.send_from_directory("templates/", "clickbaitAbout.html")
 
 @app.route("/api/v1/classify", methods=["POST"])
 def classify_api():

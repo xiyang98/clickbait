@@ -1,3 +1,9 @@
+.aboutLink {
+    margin-left: 150px;
+    position: fixed;
+    text-align: center;
+}
+
 .analyzeButton {
     background-color:red;
     border: none;
@@ -30,6 +36,7 @@ h1 {
     height: 25px;
     margin-left: 150px;
     padding: 2%;
+    text-align: center;
     width: 60%;
 }
 
