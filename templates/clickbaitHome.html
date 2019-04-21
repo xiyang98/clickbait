@@ -26,6 +26,10 @@
     <button class="analyzeButton" onclick="apiRequest()"> Analyze! </button>
   </div>
 
+  <div id="progress">
+    <div id="progressBar"></div>
+  </div>
+
   <p id="predictions"> </p>
 
   <div class="about">
@@ -38,6 +42,7 @@
     function apiRequest() {
       console.log("Making request ...");
       var userUrl = document.getElementById("urlBox").value;
+      move()
       $.ajax({
         // Where are we sending the data?
         method: "POST",
@@ -52,12 +57,14 @@
           console.log("Got the prediction result!");
           console.log(data);
           prediction = data.predictions * 100;
+          document.getElementById("progress").innerHTML = "";
           $("#predictions").text("This video is " + prediction + "% likely to be clickbait");
         },
         error: data => {
           console.error("There was an error!");
           console.error(data);
           console.log(userUrl);
+          document.getElementById("progress").innerHTML = "";
           $("#predictions").text("There was an error! Please check the URL you inputted or try anotha one :~)");
         }
       })
@@ -65,6 +72,20 @@
 
     function clearContents(element) {
       element.value = '';
+    }
+
+    function move() {
+      var elem = document.getElementById("progressBar"); 
+      var width = 1;
+      var id = setInterval(frame, 30);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+        } else {
+          width++; 
+          elem.style.width = width + '%'; 
+        }
+      }
     }
 
   </script>
