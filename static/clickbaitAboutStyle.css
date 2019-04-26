@@ -11,3 +11,24 @@ h1 {
     font-family: Impact;
     text-decoration: none;
 }
+
+.backButton {
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+.homeLink {
+    text-decoration: none;
+}
+
+.homeLink:visited {
+    color: black;
+}
+
+.homeLink:hover {
+    color: blanchedalmond;
+}
