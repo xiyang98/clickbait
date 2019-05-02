@@ -27,7 +27,7 @@
 }
 
 .aboutLink:hover {
-    color: blanchedalmond;
+    color: red;
 }
 
 .analyzeButton {
@@ -38,6 +38,11 @@
     font-size: 18px;
     margin-left: 10px;
     padding: 2%;
+}
+
+.analyzeButton:hover {
+    background-color: white;
+    color: red;
 }
 
 body {
@@ -51,7 +56,12 @@ h1 {
 .homeTitle {
     color: black;
     font-family: 'Fjalla One', sans-serif;
+    text-align: center;
     text-decoration: none;
+}
+
+.homeTitle:hover {
+    color: red;
 }
 
 .inputBox {
@@ -87,4 +97,12 @@ h1 {
     height: 30px;
     text-align: center;
     width: 0%;
+}
+
+#result {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px;
+    width: 50%;
 }
