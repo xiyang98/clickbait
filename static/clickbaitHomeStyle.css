@@ -8,7 +8,7 @@
 }
 
 #grad {
-    background-image: linear-gradient(to top, red, 30%, white);
+    background-image: linear-gradient(to top, #434343ff, 30%, white);
     background-size: auto;
     width: 100%; 
     height: 100%; 
@@ -27,7 +27,7 @@
 }
 
 .aboutLink:hover {
-    color: blanchedalmond;
+    color: red;
 }
 
 .analyzeButton {
@@ -38,6 +38,11 @@
     font-size: 18px;
     margin-left: 10px;
     padding: 2%;
+}
+
+.analyzeButton:hover {
+    background-color: white;
+    color: red;
 }
 
 body {
@@ -54,6 +59,9 @@ h1 {
     text-decoration: none;
 }
 
+.homeTitle:hover {
+    color: red;
+}
 .inputBox {
     background-color: #f2f2f2;
     border: none;
@@ -75,7 +83,7 @@ h1 {
 }
 
 #predictions {
-    padding: 25px 25px 25px 150px;
+    padding: 15px 15px 15px 150px;
     text-align: center;
     width: 71%;
 }
@@ -87,4 +95,18 @@ h1 {
     height: 30px;
     text-align: center;
     width: 0%;
+}
+
+#title {
+    padding: 15px 25px 15px 150px;
+    text-align: center;
+    width: 71%;
+}
+
+#thumbnail {
+    padding-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
 }

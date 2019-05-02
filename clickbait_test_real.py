@@ -23,7 +23,7 @@ logging.getLogger('googleapicliet.discovery_cache').setLevel(logging.CRITICAL)
 # The CLIENT_SECRETS_FILE variable specifies the name of a file that contains
 # the OAuth 2.0 information for this applicsation, including its client_id and
 # client_secret.
-CLIENT_SECRETS_FILE = "client_secret_3.json"
+CLIENT_SECRETS_FILE = "client_secret.json"
 CLICKBAIT_CHANNELS_FILE = "more_clickbait.json"
 
 # This OAuth 2.0 access scope allows for full read/write access to the
