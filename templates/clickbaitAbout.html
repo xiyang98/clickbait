@@ -26,13 +26,13 @@
     <div class="wrapper row2">
       <div id="container" class="clear">
         <!-- ####################################################################################################### -->
-        <!-- ####################################################################################################### -->
-        <!-- ####################################################################################################### -->
-        <!-- ####################################################################################################### -->
         <div id="about-us" class="clear">
           <!-- ####################################################################################################### -->
           <section id="about-intro" class="clear">
-            <p>Team intro!</p>
+            <p>Social media users are bombarded on a daily basis by links to videos, each fishing for the attention of more viewers. Content creators often take to writing outrageous headlines and editing shocking video thumbnails in the hopes of increasing their view count. It can be difficult and time consuming for viewers to discern whether the contents of a video are indeed what the creator advertised, or if that video is clickbait. Using our two machine learning models, we are able to predict for our users whether a given YouTube video is clickbait.
+              Our models work as follows: To retrieve training data we wrote a Python script using the YouTube Data API, which allows us to download data about any YouTube video. We trained our models using sources that are known for uploading clickbait videos and others for uploading non-clickbait videos. 
+              We created a Clickbait Detector written to detect clickbait headlines using deep learning. The script is written in Python, using Keras and Tensorflow. This Clickbait Detector detects based on metadata, excluding thumbnails. The classification model used is Support Vector Machine. We also use Word2Vec model to transform title into vector representation. We use other video metadata in the prediction as they could potentially help the model to give a better prediction. In addition, the Clickbait Detector has an image classifier that uses a CNN model to do a binary classification of images. This classifier takes in a video’s thumbnail image and classifies it as clickbait or not clickbait. 
+              </p>
           </section>
           <!-- ####################################################################################################### -->
           <section id="team">

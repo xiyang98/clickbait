@@ -9,7 +9,7 @@ Licence: <a href="https://www.os-templates.com/template-terms">Website Template 
 .one_half, 
 .one_third, .two_third, 
 .one_quarter, .two_quarter, .three_quarter, 
-.one_fifth, .two_fifth, .three_fifth, .four_fifth{display:inline-block; float:left; margin:0 0 0 20px; list-style:none;}
+.one_fifth, .two_fifth, .three_fifth, .four_fifth{display:inline-block; float:left; margin:0 0 0 0px; list-style:none;}
 
 .one_third, .two_third{margin:0 0 0 30px;}
 
@@ -38,7 +38,7 @@ Licence: <a href="https://www.os-templates.com/template-terms">Website Template 
 
 /*----------------------------------------------Fifth Grid-------------------------------------*/
 
-.one_fifth{width:176px;}
+.one_fifth{width:255px;}
 .two_fifth{width:372px;}
 .three_fifth{width:568px;}
 .four_fifth{width:764px;}
