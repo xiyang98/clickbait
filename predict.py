@@ -11,6 +11,7 @@ from fastai.vision import *
 import requests
 from io import BytesIO
 
+# ignore warnings of deprecation
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def tokenize(string):
